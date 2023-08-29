@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/index.css" />
+    <script
+      src="https://kit.fontawesome.com/b2fa41e0f7.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="container">
+      <div id="header">
+        <h1>Todo App</h1>
+      </div>
+      <div class="form_container">
+        <form action="/create-task" method="post" id="add_form">
+          <p class="form_description">
+            <label for="description">Description</label>
+            <input
+              type="text"
+              name="description"
+              id="task_description"
+              placeholder="Please input what you want to do"
+              required
+            />
+          </p>
+          <div class="form_data">
+            <div class="form_category">
+              <label for="category">Category</label>
+              <select name="category" id="task_category" required>
+                <option value="" disabled selected>Choose your category</option>
+                <option value="Personal">Personal</option>
+                <option value="School">School</option>
+                <option value="Work">Work</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div class="form_date">
+              <label for="dueDate">Due Date</label>
+              <input type="date" id="task_due_date" name="dueDate" required />
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="buttons">
+            <button type="submit" id="add_button" form="add_form">
+              <i class="fa-solid fa-plus"></i> Add Task
+            </button>
+            <button id="delete_button" form="delete_form" type="submit">
+              <i class="fa-solid fa-trash"></i>Delete Task
+            </button>
+      </div>
+      <div class="taskList_header">
+        <h2>Added Tasks</h2>
+    </div>
+      <div class="taskList_container">
+        <% if(tasks.length == 0){%>
+            <h3 class="warning_title">No task available. Please add new tasks</h3>
+            <%}%>
+        <form action="/delete-task" method="post" id="delete_form">
+          <ul>
+            <% for(let task of tasks) {%>
+            <li>
+              <div class="card">
+                <p>
+                  <input
+                    type="checkbox"
+                    name="selectedIds"
+                    value="<%= task._id %>"
+                    class="check_box"
+                  />
+                </p>
+                <div class="task_details">
+                  <p class="task_title"><%=task.description%></p>
+                  <p class="task_due_date" data-value="<%=task._id%>">
+                    <i class="fa-solid fa-calendar-days"></i>
+                    <%=task.dueDate%>
+                  </p>
+                </div>
+                <div class="task_category_section <%=task.category%>">
+                    <p class="task_category"><%=task.category%></p>
+                </div>
+              </div>
+            </li>
+            <%}%>
+          </ul>
+        </form>
+      </div>
+    </div>
+    <script src="/js/index.js"></script>
+  </body>
+</html>
