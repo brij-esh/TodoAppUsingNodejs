@@ -47,7 +47,7 @@
           </div>
         </form>
       </div>
-    <!-- External buttons for adding and deleting task -->
+      <!-- External buttons for adding and deleting task -->
       <div class="buttons">
         <button type="submit" id="add_button" form="add_form">
           <i class="fa-solid fa-plus"></i> Add Task
@@ -79,12 +79,7 @@
                     name="selectedIds"
                     value="<%= task._id %>"
                     class="check_box"
-                    <%
-                    if
-                    (task.state)
-                    {
-                    %
-                  />checked<% } %> />
+                    <% if(task.state) { %>checked<% } %> />
                 </p>
                 <div class="task_details">
                   <p class="task_title"><%=task.description%></p>
