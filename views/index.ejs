@@ -11,10 +11,12 @@
     ></script>
   </head>
   <body>
+    <!-- Todo App Window -->
     <div class="container">
       <div id="header">
         <h1>Todo App</h1>
       </div>
+      <!-- Container that will take data for creation of Task Object -->
       <div class="form_container">
         <form action="/create-task" method="post" id="add_form">
           <p class="form_description">
@@ -45,21 +47,27 @@
           </div>
         </form>
       </div>
+    <!-- External buttons for adding and deleting task -->
       <div class="buttons">
-            <button type="submit" id="add_button" form="add_form">
-              <i class="fa-solid fa-plus"></i> Add Task
-            </button>
-            <button id="delete_button" form="delete_form" type="submit">
-              <i class="fa-solid fa-trash"></i>Delete Task
-            </button>
+        <button type="submit" id="add_button" form="add_form">
+          <i class="fa-solid fa-plus"></i> Add Task
+        </button>
+        <button id="delete_button" form="delete_form" type="submit">
+          <i class="fa-solid fa-trash"></i>Delete Task
+        </button>
       </div>
+
+      <!-- Task List header to represent the task list will be shown here -->
       <div class="taskList_header">
         <h2>Added Tasks</h2>
-    </div>
+      </div>
+      <!-- Handle case if task list is empty -->
       <div class="taskList_container">
         <% if(tasks.length == 0){%>
-            <h3 class="warning_title">No task available. Please add new tasks</h3>
-            <%}%>
+        <h3 class="warning_title">No task available. Please add new tasks</h3>
+        <%}%>
+
+        <!-- Form for displaying all the tasks -->
         <form action="/delete-task" method="post" id="delete_form">
           <ul>
             <% for(let task of tasks) {%>
@@ -71,17 +79,25 @@
                     name="selectedIds"
                     value="<%= task._id %>"
                     class="check_box"
-                  />
+                    <%
+                    if
+                    (task.state)
+                    {
+                    %
+                  />checked<% } %> />
                 </p>
                 <div class="task_details">
                   <p class="task_title"><%=task.description%></p>
-                  <p class="task_due_date" data-value="<%=task._id%>">
+                  <p
+                    class="task_due_date <%=task.state ? 'completed' : ''%>"
+                    data-value="<%=task._id%>"
+                  >
                     <i class="fa-solid fa-calendar-days"></i>
                     <%=task.dueDate%>
                   </p>
                 </div>
                 <div class="task_category_section <%=task.category%>">
-                    <p class="task_category"><%=task.category%></p>
+                  <p class="task_category"><%=task.category%></p>
                 </div>
               </div>
             </li>

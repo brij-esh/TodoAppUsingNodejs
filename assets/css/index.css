@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap');
-
+/* Default margin and padding set */
 *{
     margin: 0;
     padding: 0;
@@ -12,7 +12,7 @@
 .completed{
     text-decoration: line-through;
 }
-
+/* Set body height and width */
 body{
     height: 100vh;
     width: 100vw;
@@ -20,14 +20,15 @@ body{
     justify-content: center;
     align-items: center;
 }
+/* Styling todo window */
 .container{
     padding: 15px;
     width: 60%;
     height: 90%;
     box-shadow: 0px 0px 300px 50px rgba(130,120,130,1);
-    border: 2px solid;
+    /* border: 2px solid; */
 }
-
+/* Styling Todo App heading */
 #header{
     margin: auto;
     width: 100%;
@@ -36,6 +37,7 @@ body{
     padding: 5px;
     border-bottom: 2px solid black;
 }
+/* Styling task creation form  */
 .form_container{
     margin: 10px 0px;
     width: 100%;
@@ -71,6 +73,9 @@ input, select{
     outline: none;
     margin: 5px 0px;
 }
+/* Task creation form end */
+
+/* Styling buttons start */
 .buttons{
     margin:20px 0px;
     width: 100%;
@@ -107,7 +112,8 @@ button:hover{
     top: 35%;
     left: 55%;
 }
-
+/* Styling buttons end here */
+/* Task List container / display start here */
 .taskList_container{
     margin-top: 10px;
     width: 100%;
@@ -132,6 +138,7 @@ button:hover{
 #delete_form{
     margin-top:20px ;
 }
+/* Styling card for showing each task */
 .card{
     height: 50px;
    display: flex;

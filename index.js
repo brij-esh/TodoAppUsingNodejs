@@ -20,7 +20,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'assets')));
 app.use(express.urlencoded());
 app.use(bodyParser.urlencoded({extended: true}));
-
+app.use(express.json());
 
 //create get request for the home page and export all tasks to the page
 app.get('/', (req, res)=>{
@@ -40,7 +40,8 @@ app.post('/create-task', (req, res)=>{
     taskList.create({
         description : req.body.description,
         category : req.body.category,
-        dueDate : req.body.dueDate
+        dueDate : req.body.dueDate,
+        state : false
     }).then((result) =>{
         console.log(`Task : ${result}`);
         return res.redirect('back');
@@ -64,6 +65,32 @@ app.post('/delete-task', function(req, res) {
         console.log(`Failed to delete`);
         return res.redirect('back');
     })
+});
+
+//update the task as completed
+app.post('/toggle-check', function(req, res){
+    console.log(req.body.id);
+    taskList.updateOne(
+        { _id: req.body.id },
+        { $set: { state: true } }
+      ).then((result) =>{
+        console.log(`One task was successfully updated`);
+      }).catch((err) =>{
+        console.log(`Something went wrong`);
+      })
+});
+
+//update task as not completed
+app.post('/toggle-uncheck', function(req, res){
+    console.log(req.body.id);
+    taskList.updateOne(
+        { _id: req.body.id },
+        { $set: { state: false } }
+      ).then((result) =>{
+        console.log(`One task was successfully updated`);
+      }).catch((err) =>{
+        console.log(`Something went wrong`);
+      })
 });
 
 //server configuration at particular port and log whether connection is established or not

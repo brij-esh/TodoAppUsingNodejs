@@ -1,5 +1,7 @@
+// Importing the mongoose module
 const mongoose = require('mongoose');
 
+// Create task schema for storing task
 const taskSchema = new mongoose.Schema({
     description : {
         type: 'string',
@@ -12,8 +14,12 @@ const taskSchema = new mongoose.Schema({
     dueDate : {
         type: 'string',
         required : true
+    },
+    state :{
+        type: 'boolean',
+        required: true
     }
 });
-
 const tasks = mongoose.model('Tasks', taskSchema);
+// Exporting the schema
 module.exports = tasks;
