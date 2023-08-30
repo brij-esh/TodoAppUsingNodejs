@@ -8,7 +8,7 @@ const db = require('./config/mongoose_config');
 const taskList = require('./models/task');
 
 //defining server configuration port
-const port = 8000;
+const port = process.env.PORT || 8000;
 
 //create server instance
 const app = express();
